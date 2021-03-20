@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home::PAGE</title>
+    <link rel="stylesheet" href="/dist/css/bootstrap.css" />
+  </head>
+  <body>
+    <%- include("partial/navbar.ejs"); -%>
+    <div class="container">
+      <div class="row">
+        <div class="col my-5 mx-auto">
+          <div class="card">
+            <div class="card-header">
+              <h1 class="muted text-center text-success">All Users</h1>
+            </div>
+            <div class="card-body">
+              <table
+                class="table table-bordered table-hover table-striped table-responsive-md"
+              >
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Password</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% if(userData.length != 0){userData.forEach(data=>{%>
+                  <tr>
+                    <td><%= data.id %></td>
+                    <td><%= data.name %></td>
+                    <td><%= data.email %></td>
+                    <td><%= data.password %></td>
+                    <td>
+                      <a
+                        class="btn btn-block btn-outline-info"
+                        href="/edit/<%=data.id %>"
+                        >Edit</a
+                      >
+                    </td>
+                    <td>
+                      <a
+                        class="btn btn-block btn-outline-danger"
+                        href="/delete/<%=data.id %>"
+                        >Delete</a
+                      >
+                    </td>
+                  </tr>
+                  <%})}%>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://getbootstrap.com/docs/4.0/assets/js/vendor/popper.min.js"></script>
+    <script src="https://getbootstrap.com/docs/4.0/dist/js/bootstrap.min.js"></script>
+    <script>
+      $(function () {
+        $('a[href^="/' + location.pathname.split("/")[1] + '"]').addClass(
+          "active"
+        );
+      });
+    </script>
+  </body>
+</html>
